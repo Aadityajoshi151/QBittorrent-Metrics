@@ -86,14 +86,12 @@ def main():
 	except qbittorrentapi.LoginFailed as e:
 		print(e)
 	all_torrents = qbt_client.torrents_info()
-	print(type(all_torrents[0]))
-	print(all_torrents[0].keys())
-	# #Create the workbook
-	# workbook = create_workbook()
-	# #Add torrents to the workbook
-	# workbook = add_torrents_to_workbook(workbook, all_torrents)	
-	# #Save the workbook
-	# save_workbook(workbook)
+	#Create the workbook
+	workbook = create_workbook()
+	#Add torrents to the workbook
+	workbook = add_torrents_to_workbook(workbook, all_torrents)	
+	#Save the workbook
+	save_workbook(workbook)
 
 if __name__=="__main__":
     main()
