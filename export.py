@@ -78,9 +78,11 @@ def save_workbook(workbook):
 def main():
 	BASEDIR = os.path.abspath(os.path.dirname(__name__))
 	load_dotenv(os.path.join(BASEDIR,"credentials.env"))
+	qbit_hostname = os.getenv("QBIT_HOSTNAME")
+	qbit_port = os.getenv("QBIT_PORT")
 	qbit_username = os.getenv("QBIT_USERNAME")
 	qbit_password = os.getenv("QBIT_PASSWORD")
-	qbt_client = qbittorrentapi.Client(host='localhost', port=8080, username=qbit_username, password=qbit_password)
+	qbt_client = qbittorrentapi.Client(host=qbit_hostname, port=qbit_port, username=qbit_username, password=qbit_password)
 	try:
 		qbt_client.auth_log_in()
 	except qbittorrentapi.LoginFailed as e:
