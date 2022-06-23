@@ -30,6 +30,6 @@ If you are not running this on localhost, then enter your ip address and port nu
 | Uploaded   | How much data is uploaded from your end. Size in MB/GB                |
 | Ratio      | Share ratio                                                           |
 | Category   | If the specefic torrent is categorized. _None_ if no category present |
-| Hash       | Complete has of the torrent                                           |
+| Hash       | Complete hash of the torrent                                           |
 
 These are the metrics that I need hence this is what the script exports. You can modify the script according to your own needs. Refer the [qbitorrent-api docs](https://qbittorrent-api.readthedocs.io/en/latest/) for more info.
