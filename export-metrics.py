@@ -72,7 +72,7 @@ def add_torrents_to_workbook(workbook, torrents):
 	return(workbook)
 
 def save_workbook(workbook):
-	filename = f'qBittorrent Metrics {datetime.datetime.today().strftime(time_format)}.xlsx'
+	filename = f'qBittorrent_Metrics_{datetime.datetime.today().strftime(time_format)}.xlsx'
 	workbook.save(filename)
 	print(f'Saved {filename}.')
 
