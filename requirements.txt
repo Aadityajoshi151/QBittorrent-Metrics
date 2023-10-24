@@ -1,4 +1,4 @@
-﻿hurry.filesize==0.9
-openpyxl==3.0.5
-qbittorrent-api==2020.12.14
-python-dotenv==0.20.0 
+﻿hurry.filesize
+openpyxl
+qbittorrent-api
+python-dotenv
