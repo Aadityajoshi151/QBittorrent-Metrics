@@ -45,6 +45,7 @@ def create_workbook():
 		'Uploaded',
 		'Ratio',
 		'Category',
+		'Path',
 		'Hash',
 	)
 	worksheet.append(header_row)	
@@ -65,6 +66,7 @@ def add_torrents_to_workbook(workbook, torrents):
 			format_bytes(torrent.uploaded),
 			round(torrent.ratio, 2),
 			"None" if torrent.category == "" else torrent.category,
+			torrent.save_path,
 			torrent.hash,
 		)
 		worksheet.append(new_row)
