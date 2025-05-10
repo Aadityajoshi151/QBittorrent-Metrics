@@ -45,6 +45,7 @@ def create_workbook():
 		'Uploaded',
 		'Ratio',
 		'Category',
+		'Path',
 		'Hash',
 	)
 	worksheet.append(header_row)	
@@ -57,18 +58,18 @@ def create_workbook():
 def add_torrents_to_workbook(workbook, torrents):
 	worksheet = workbook['Torrents']
 	for torrent in torrents:
-		if "PSA" in torrent.name:
-			new_row = (
-				torrent.name.replace(".mkv",""),
-				format_bytes(torrent.size),
-				datetime.datetime.fromtimestamp(torrent.added_on).strftime("%d %B %Y, %I:%M %p"),
-				format_seconds(torrent.seeding_time),
-				format_bytes(torrent.uploaded),
-				round(torrent.ratio, 2),
-				"None" if torrent.category == "" else torrent.category,
-				torrent.hash,
-			)
-			worksheet.append(new_row)
+		new_row = (
+			torrent.name.replace(".mkv",""),
+			format_bytes(torrent.size),
+			datetime.datetime.fromtimestamp(torrent.added_on).strftime("%d %B %Y, %I:%M %p"),
+			format_seconds(torrent.seeding_time),
+			format_bytes(torrent.uploaded),
+			round(torrent.ratio, 2),
+			"None" if torrent.category == "" else torrent.category,
+			torrent.save_path,
+			torrent.hash,
+		)
+		worksheet.append(new_row)
 	return(workbook)
 
 def save_workbook(workbook):
