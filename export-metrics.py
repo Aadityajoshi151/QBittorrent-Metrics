@@ -33,6 +33,14 @@ def format_seconds(seconds, granularity=2):
             result.append("{} {}".format(value, name))
     return ', '.join(result[:granularity])
 
+def format_completion_time(timestamp):
+    try:
+        if timestamp <= 0:
+            return "Not completed"
+        return datetime.datetime.fromtimestamp(timestamp).strftime("%d %B %Y, %I:%M %p")
+    except (OSError, ValueError, OverflowError):
+        return "Not completed"
+
 def create_workbook():
 	new_workbook = openpyxl.Workbook()
 	worksheet = new_workbook.active
@@ -47,12 +55,30 @@ def create_workbook():
 		'Category',
 		'Path',
 		'Hash',
+		'Magnet Link',
+		'Time Active',
+		'Downloaded',
+		'Completed On',
 	)
 	worksheet.append(header_row)	
 	# This makes the rows bold
 	for row in worksheet.iter_rows():
 		for cell in row:
 			cell.font = openpyxl.styles.Font(bold = True)
+	# This set the column widths
+	worksheet.column_dimensions['A'].width = 55
+	worksheet.column_dimensions['B'].width = 9
+	worksheet.column_dimensions['C'].width = 25
+	worksheet.column_dimensions['D'].width = 20
+	worksheet.column_dimensions['E'].width = 10
+	worksheet.column_dimensions['F'].width = 5
+	worksheet.column_dimensions['G'].width = 8
+	worksheet.column_dimensions['H'].width = 18
+	worksheet.column_dimensions['I'].width = 5
+	worksheet.column_dimensions['J'].width = 11
+	worksheet.column_dimensions['K'].width = 20
+	worksheet.column_dimensions['L'].width = 11
+	worksheet.column_dimensions['M'].width = 25
 	return(new_workbook)
 
 def add_torrents_to_workbook(workbook, torrents):
@@ -68,6 +94,10 @@ def add_torrents_to_workbook(workbook, torrents):
 			"None" if torrent.category == "" else torrent.category,
 			torrent.save_path,
 			torrent.hash,
+			torrent.magnet_uri,
+			format_seconds(torrent.time_active),
+			format_bytes(torrent.downloaded),
+			format_completion_time(torrent.completion_on),
 		)
 		worksheet.append(new_row)
 	return(workbook)
