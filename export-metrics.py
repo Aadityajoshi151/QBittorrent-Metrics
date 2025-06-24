@@ -55,9 +55,7 @@ def create_workbook():
 		'Category',
 		'Path',
 		'Hash',
-		'Magnet Link',
 		'Time Active',
-		'Downloaded',
 		'Completed On',
 	)
 	worksheet.append(header_row)	
@@ -75,10 +73,8 @@ def create_workbook():
 	worksheet.column_dimensions['G'].width = 8
 	worksheet.column_dimensions['H'].width = 18
 	worksheet.column_dimensions['I'].width = 5
-	worksheet.column_dimensions['J'].width = 11
-	worksheet.column_dimensions['K'].width = 20
-	worksheet.column_dimensions['L'].width = 11
-	worksheet.column_dimensions['M'].width = 25
+	worksheet.column_dimensions['J'].width = 20
+	worksheet.column_dimensions['K'].width = 25
 	return(new_workbook)
 
 def add_torrents_to_workbook(workbook, torrents):
@@ -94,9 +90,7 @@ def add_torrents_to_workbook(workbook, torrents):
 			"None" if torrent.category == "" else torrent.category,
 			torrent.save_path,
 			torrent.hash,
-			torrent.magnet_uri,
 			format_seconds(torrent.time_active),
-			format_bytes(torrent.downloaded),
 			format_completion_time(torrent.completion_on),
 		)
 		worksheet.append(new_row)
